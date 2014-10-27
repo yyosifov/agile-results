@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "express": "~4.9.x",
-    "requiest": "2.46.0"
+    "request": "2.46.0"
   },
   "engines": {
     "node": "0.10.x",
