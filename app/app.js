@@ -1,6 +1,6 @@
-define(['angular', 'uiRouter', 'menu'], function (angular) {
+define(['angular', 'uiRouter', 'menu', 'dailyController', 'goal', 'goalList'], function (angular) {
     var agileResultsApp = angular.module('agileResults', ['ui.router']);
-    var menuDirective = require('menu');
+    var dailyController = require('dailyController');
 
     agileResultsApp.config(function ($stateProvider, $urlRouterProvider) {
         //$urlRouterProvider.otherwise('/daily');
@@ -11,7 +11,8 @@ define(['angular', 'uiRouter', 'menu'], function (angular) {
             abstract: true
         }).state('daily.manage', {
                 url: '/manage',
-                templateUrl: 'partials/daily-manage.html'
+                templateUrl: 'partials/daily-manage.html',
+                controller: dailyController
             })
             .state('daily.history', {
             url: '/history',
@@ -19,7 +20,9 @@ define(['angular', 'uiRouter', 'menu'], function (angular) {
         });
     });
 
-    agileResultsApp.directive('menu', menuDirective);
+    agileResultsApp.directive('menu', require('menu'));
+    agileResultsApp.directive('goal', require('goal'));
+    agileResultsApp.directive('goalList', require('goalList'));
 
     return agileResultsApp;
 });
