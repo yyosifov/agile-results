@@ -1,10 +1,16 @@
 /* node */
 var DataService = require('./data-service');
+var dataService = new DataService();
 
 var RouteHandlers = {
     getDaily: function(req, res) {
-        var dataService = new DataService();
-        dataService.getDaily(null, null, function(err, data) {
+        dataService.getDaily(req.query, null, function(err, data) {
+            RouteHandlers.sendJson(res, data);
+        });
+    },
+
+    createDaily: function(req, res) {
+        dataService.saveDaily(req.body, null, function(err, data) {
             RouteHandlers.sendJson(res, data);
         });
     },
