@@ -6,12 +6,7 @@ require.config({
         'angular': 'bower_components/angular/angular',
         'uiRouter': 'bower_components/angular-ui-router/release/angular-ui-router',
         'lodash': 'bower_components/lodash/dist/lodash',
-        'app': 'app',
-        'menu': 'directives/menu/menu',
-        'goal': 'directives/goal/goal',
-        'goalList': 'directives/goal/goalList',
-        'dailyController': 'controllers/dailyController',
-        'goalsService': 'services/goalsService'
+        'app': 'app'
     },
     shim: {
         'angular': { 'exports': 'angular' },

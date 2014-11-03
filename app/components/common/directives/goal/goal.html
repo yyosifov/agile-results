@@ -1,0 +1,6 @@
+<div ng-if="!item.IsNew">
+    <label><input type="checkbox" ng-bind="$parent.item.IsCompleted"/>{{ $parent.item.Title }}</label>
+</div>
+<div ng-if="item.IsNew">
+    <input type="text" ng-trim="true" ng-model="$parent.item.Title" ng-blur="$parent.item.save()" />
+</div>
