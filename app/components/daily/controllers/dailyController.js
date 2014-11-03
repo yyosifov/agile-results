@@ -1,4 +1,4 @@
-define(['angular', 'lodash'], function(angular, _) {
+define(['../../.', 'lodash'], function(angular, _) {
     return ['$scope', 'GoalsService', function($scope, GoalsService) {
         $scope.goals = [];
         $scope.dailyName = 'Hello from Daily';
