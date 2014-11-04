@@ -9,8 +9,14 @@ var RouteHandlers = {
         });
     },
 
-    createDaily: function(req, res) {
-        dataService.saveDaily(req.body, null, function(err, data) {
+    saveGoal: function(req, res) {
+        dataService.saveGoal(req.body, null, function(err, data) {
+            RouteHandlers.sendJson(res, data);
+        });
+    },
+
+    deleteGoal: function(req, res) {
+        dataService.deleteGoal(req.params.goalId, null, function(err, data) {
             RouteHandlers.sendJson(res, data);
         });
     },

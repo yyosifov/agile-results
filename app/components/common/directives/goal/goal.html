@@ -1,5 +1,11 @@
 <div ng-if="!item.IsNew">
-    <label><input type="checkbox" ng-bind="$parent.item.IsCompleted"/>{{ $parent.item.Title }}</label>
+    <label ng-class="{'line-through': $parent.item.IsCompleted}">
+        <input type="checkbox"
+               ng-model="$parent.item.IsCompleted"
+               ng-click="$parent.item.save()"
+               />{{ $parent.item.Title }}
+    </label>
+    <button ng-click="$parent.item.delete(); $event.stopPropagation();">x</button>
 </div>
 <div ng-if="item.IsNew">
     <input type="text" ng-trim="true" ng-model="$parent.item.Title" ng-blur="$parent.item.save()" />

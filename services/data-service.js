@@ -20,7 +20,7 @@ DataService.prototype.getAgileResultsUrl = function () {
 
 DataService.prototype.getDaily = function (date, user, done) {
     var filter = '{"Type": ' + GoalTypes.Daily + ', "Data.Date.Day": ' + date.Day
-    + ', "Data.Date.Month": ' + date.Month + ', "Data.Date.Year": ' + date.Year + '}';
+        + ', "Data.Date.Month": ' + date.Month + ', "Data.Date.Year": ' + date.Year + '}';
 
     var options = {
         method: 'get',
@@ -34,7 +34,7 @@ DataService.prototype.getDaily = function (date, user, done) {
     });
 };
 
-DataService.prototype.saveDaily = function (goal, user, done) {
+DataService.prototype.saveGoal = function (goal, user, done) {
     var options = {
         json: true,
         url: this.getAgileResultsUrl()
@@ -51,7 +51,7 @@ DataService.prototype.saveDaily = function (goal, user, done) {
                 return done(err);
             }
 
-            if(res.statusCode === 201) {
+            if (res.statusCode === 201) {
                 done();
             } else {
                 done(body);
@@ -59,7 +59,37 @@ DataService.prototype.saveDaily = function (goal, user, done) {
         });
     } else {
         // update
+        options.method = 'put';
+        options.body = goal;
+        options.url = options.url + '/' + goal.Id;
+
+        request(options, function (err, res, body) {
+            if (err) {
+                return done(err);
+            }
+
+            done();
+        });
     }
+};
+
+DataService.prototype.deleteGoal = function (goalId, user, done) {
+    var options = {
+        json: true,
+        url: this.getAgileResultsUrl()
+    };
+
+    // update
+    options.method = 'delete';
+    options.url = options.url + '/' + goalId;
+
+    request(options, function (err, res, body) {
+        if (err) {
+            return done(err);
+        }
+
+        done();
+    });
 };
 
 module.exports = DataService;

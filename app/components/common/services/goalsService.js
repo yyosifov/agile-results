@@ -1,5 +1,5 @@
 define(['angular'], function (angular) {
-    return ['config', '$http', '$q', function (config, $http, $q) {
+    return ['config', '$http', '$q', '$rootScope', function (config, $http, $q, $rootScope) {
         var serverUrl = config.httpServerUrl;
         var dailyUrl = serverUrl + 'api/v1/agile/daily'; // can use $resource
 
@@ -42,6 +42,7 @@ define(['angular'], function (angular) {
             wrappedGoal.Id = goal.Id || generateGuid();
             wrappedGoal.Type = goal.Type || type;
             wrappedGoal.Data = wrappedGoal.Data || {};
+            wrappedGoal.IsCompleted = wrappedGoal.IsCompleted || false;
             if (wrappedGoal.Type === 1) {/*daily*/
                 if (!wrappedGoal.Data.Date) {
                     var now = splitDate(new Date());
@@ -50,18 +51,26 @@ define(['angular'], function (angular) {
             }
 
             wrappedGoal.save = angular.bind(this, function (item) {
-                if (item.IsNew) {
-                    $http.post(dailyUrl, item, {
-                        'Content-Type': 'application/json'
-                    }).then(function() {
-                            item.IsNew = false; // no longer new.
-                        }, function() {
-                            // error occured, handle it here;
-                        });
-
-
-                }
+                var method = item.isNew ? $http.post : $http.put;
+                method(dailyUrl, item, {
+                    'Content-Type': 'application/json'
+                }).then(function () {
+                        item.IsNew = false; // no longer new.
+                    }, function () {
+                        // error occured, handle it here;
+                    });
             }, wrappedGoal);
+
+            wrappedGoal.delete = angular.bind(this, function(item) {
+                var deleteUrl = dailyUrl + '/' + item.Id;
+                $http.delete(deleteUrl, {
+                    'Content-Type': 'application/json'
+                }).then(function() {
+                        $rootScope.$broadcast('hello', item);
+                        //var itemIndex = $scope.goals.indexOf(item);
+                        //$scope.goals = $scope.goals.splice(itemIndex, 1);
+                    });
+            },wrappedGoal);
 
             return wrappedGoal;
         };

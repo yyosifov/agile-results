@@ -13,7 +13,11 @@ var dailyUrl = '/agile/daily';
 var router = express.Router();
 router.route(dailyUrl)
     .get(RouteHandlers.getDaily)
-    .post(RouteHandlers.createDaily);
+    .post(RouteHandlers.saveGoal)
+    .put(RouteHandlers.saveGoal);
+
+router.route(dailyUrl + '/:goalId')
+    .delete(RouteHandlers.deleteGoal);
 
 // hit only when nothing else have handled the request.
 router.use(function(req,res,next) {
