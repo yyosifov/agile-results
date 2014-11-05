@@ -4,15 +4,21 @@
 require.config({
     paths: {
         'angular': 'bower_components/angular/angular',
-        'uiRouter': 'bower_components/angular-ui-router/release/angular-ui-router',
+        'angular-ui-router': 'bower_components/angular-ui-router/release/angular-ui-router',
         'lodash': 'bower_components/lodash/dist/lodash',
-        'app': 'app'
+        'app': 'app',
+        'jquery': '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min',
+        'jquery-ui': '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min'
     },
     shim: {
         'angular': { 'exports': 'angular' },
-        'uiRouter': ['angular'],
+        'angular-ui-router': ['angular'],
         'lodash': {
             'exports': '_'
+        },
+        'jquery-ui': {
+            exports: '$',
+            deps: ['jquery']
         }
     },
     deps: ['app']
@@ -23,7 +29,8 @@ window.name = "NG_DEFER_BOOTSTRAP!";
 
 require([
     'angular',
-    'app'
+    'app',
+    'jquery-ui'
 ], function(angular, app) {
     angular.element().ready(function() {
         angular.resumeBootstrap([app.name]);

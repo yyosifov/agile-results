@@ -4,7 +4,6 @@ define(['angular'], function (angular) {
         var dailyUrl = serverUrl + 'api/v1/agile/daily'; // can use $resource
 
         var GoalsService = function () {
-
         }
 
         GoalsService.prototype.getDaily = function (now) {
@@ -21,6 +20,9 @@ define(['angular'], function (angular) {
         };
 
         var splitDate = function (now) {
+            if(typeof now !== Date) {
+                now = new Date(now);
+            }
             return {
                 Day: now.getDate(),
                 Month: now.getMonth(),
@@ -66,7 +68,7 @@ define(['angular'], function (angular) {
                 $http.delete(deleteUrl, {
                     'Content-Type': 'application/json'
                 }).then(function() {
-                        $rootScope.$broadcast('hello', item);
+                        $rootScope.$broadcast('goal-deleted', item);
                         //var itemIndex = $scope.goals.indexOf(item);
                         //$scope.goals = $scope.goals.splice(itemIndex, 1);
                     });

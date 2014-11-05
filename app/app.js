@@ -1,5 +1,5 @@
 define(['angular',
-    'uiRouter',
+    'angular-ui-router',
     './components/common/common',
     './components/daily/daily'
 ], function (angular) {

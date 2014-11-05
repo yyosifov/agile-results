@@ -10,7 +10,7 @@ define([
             templateUrl: 'components/daily/partials/daily.html',
             abstract: true
         }).state('daily.manage', {
-                url: '/manage',
+                url: '/manage/:month/:day/:year',
                 templateUrl: 'components/daily/partials/daily-manage.html',
                 controller: dailyController
             })
