@@ -53,6 +53,11 @@ define(['angular'], function (angular) {
             }
 
             wrappedGoal.save = angular.bind(this, function (item) {
+                // don't save empty-titled items.
+                if(!item.Title) {
+                    return false;
+                }
+
                 var method = item.isNew ? $http.post : $http.put;
                 method(dailyUrl, item, {
                     'Content-Type': 'application/json'
