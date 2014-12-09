@@ -1,3 +1,97 @@
-body{
-  background-color: red;
+@mixin box-shadow($shadows...) {
+  -moz-box-shadow: $shadows;
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+@mixin box-sizing($sizing) {
+  -webkit-box-sizing: $sizing;
+  -moz-box-sizing: $sizing;
+  box-sizing: $sizing;
+}
+
+.main {
+  padding: 38px;
+}
+
+.form-signin {
+  @include box-shadow(0 0 3px 3px #888);
+
+  max-width: 400px;
+  display: block;
+  background-color: #f7f7f7;
+  border-radius: 2px;
+
+  & .form-signin-heading {
+    margin-bottom: 10px;
+  }
+
+  & .checkbox {
+    margin-bottom: 10px;
+    font-weight: normal;
+  }
+
+  & .form-control {
+    @include box-sizing(border-box);
+
+    position: relative;
+    font-size: 16px;
+    height: 20px;
+    padding: 20px;
+  }
+
+  & .form-control:focus {
+    z-index: 2;
+  }
+
+  & input[type="text"] {
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
+  & input[type="password"] {
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+}
+
+.social-box {
+  margin: 0 auto;
+  padding: 38px;
+  border-bottom: 1px #ccc solid;
+
+  a {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 8px;
+
+    & i {
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
+}
+
+.heading-desc {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 38px 38px 0px 38px;
+
+}
+
+.login-footer {
+  background: #f0f0f0;
+  margin: 0 auto;
+  border-top: 1px solid #dadada;
+  padding: 20px;
+
+  & .left-section a {
+    font-weight: bold;
+    color: #8a8a8a;
+    line-height: 19px;
+  }
+}
+
+.mg-btm {
+  margin-bottom: 20px;
 }
