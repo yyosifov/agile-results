@@ -8,7 +8,8 @@ require.config({
         'lodash': 'bower_components/lodash/dist/lodash',
         'app': 'app',
         'jquery': '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min',
-        'jquery-ui': '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min'
+        'jquery-ui': '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min',
+        'bootstrap': '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min'
     },
     shim: {
         'angular': { 'exports': 'angular' },
@@ -18,6 +19,10 @@ require.config({
         },
         'jquery-ui': {
             exports: '$',
+            deps: ['jquery']
+        },
+        'bootstrap': {
+            exports: 'bootstrap',
             deps: ['jquery']
         }
     },
@@ -30,7 +35,8 @@ window.name = "NG_DEFER_BOOTSTRAP!";
 require([
     'angular',
     'app',
-    'jquery-ui'
+    'jquery-ui',
+    'bootstrap'
 ], function(angular, app) {
     angular.element().ready(function() {
         angular.resumeBootstrap([app.name]);

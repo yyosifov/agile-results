@@ -1,12 +1,28 @@
-<div ng-if="!item.IsNew">
-    <label ng-class="{'line-through': $parent.item.IsCompleted}">
-        <input type="checkbox"
-               ng-model="$parent.item.IsCompleted"
-               ng-click="$parent.item.save()"
-               />{{ $parent.item.Title }}
-    </label>
-    <button ng-click="$parent.item.delete(); $event.stopPropagation();">x</button>
-</div>
-<div ng-if="item.IsNew">
-    <input type="text" ng-trim="true" ng-model="$parent.item.Title" ng-blur="$parent.item.save()" />
+<div class="row">
+    <div class="col-md-1">
+        <button type="button"
+                ng-class="{'btn-success': !item.IsCompleted, 'btn-default': item.IsCompleted}"
+                class="btn"
+                ng-click="item.IsCompleted = !item.IsCompleted; item.save()">
+            <!-- toggle the parent item and save it -->
+            <span class="glyphicon glyphicon-ok"></span>
+        </button>
+    </div>
+    <div class="col-md-7">
+        <input class="form-control" type="text"
+               ng-trim="true"
+               ng-model="item.Title"
+               ng-blur="item.save()"/>
+    </div>
+    <div class="col-md-2">
+        <div class="btn-group pull-left" role="group">
+            <!--<button type="button" class="btn btn-primary">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>-->
+            <button type="button" class="btn bnt-danger"
+                    ng-click="item.delete(); $event.stopPropagation();">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+    </div>
 </div>

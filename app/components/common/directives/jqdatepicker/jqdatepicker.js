@@ -4,6 +4,7 @@ define(['jquery-ui'], function () {
             restrict: 'A',
             require: 'ngModel',
             link: function (scope, element, attrs, ngModelCtrl) {
+                /*
                 element.datepicker({
                     dateFormat: 'mm/dd/yy',
                     onSelect: function (date) {
@@ -11,6 +12,7 @@ define(['jquery-ui'], function () {
                         scope.$apply();
                     }
                 });
+                */
             }
         };
     }
